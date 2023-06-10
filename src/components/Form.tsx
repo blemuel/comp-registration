@@ -7,7 +7,7 @@ import { Search } from '../customInputs/Search'
 import { FormData, formSchema } from '../types/types'
 
 export const Form = () => {
-  const { control, handleSubmit, formState } = useForm<FormData>({
+  const { control, handleSubmit, formState, watch } = useForm<FormData>({
     resolver: yupResolver(formSchema),
     mode: 'onChange',
   })
@@ -72,7 +72,7 @@ export const Form = () => {
             control={control}
             type="date"
           />
-          <Search control={control} />
+          <Search control={control} watch={watch} />
           <FileInput
             label="Validation file"
             name="file"

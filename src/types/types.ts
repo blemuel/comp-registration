@@ -1,11 +1,11 @@
 import * as yup from 'yup'
 
 export type Address = {
-  street: string
-  city: string
-  state: string
-  zip: string
-  country: string
+  street?: string
+  city?: string
+  state?: string
+  zip?: string
+  country?: string
 }
 
 export type FormData = {
@@ -15,6 +15,7 @@ export type FormData = {
   birthDate: Date
   companyName: string
   corporationDate: Date
+  addressString: string
   address: Address
 }
 
