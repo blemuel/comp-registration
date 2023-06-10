@@ -15,17 +15,15 @@ type Props = {
   control: Control<any>
   helperText?: string
   type?: string
-  maxLength?: number
 }
 
-export const CustomInput = ({
+export const FileInput = ({
   label,
   placeholder,
   name,
   control,
   helperText,
   type = 'text',
-  maxLength,
 }: Props) => {
   const {
     field: { onChange, onBlur, value, ref },
@@ -50,7 +48,6 @@ export const CustomInput = ({
           onBlur={onBlur}
           isInvalid={invalid}
           type={type}
-          maxLength={maxLength}
         />
         {invalid ? (
           <FormErrorMessage>{error?.message}</FormErrorMessage>

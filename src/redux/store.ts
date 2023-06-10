@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { reducer as reduxFormReducer } from 'redux-form'
+import addressSlice from './feature/addressSlice'
+import authReducer from './feature/formSlice'
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    form: reduxFormReducer,
+    auth: authReducer,
+    address: addressSlice,
   },
 })
+export default store
