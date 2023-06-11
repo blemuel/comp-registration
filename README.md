@@ -4,11 +4,11 @@ This is a simple form using React, Typescript, react-hook-form, Chakra UI and Re
 
 Before start the project, you need to install the dependencies:
 
-### `yarn`
+## `yarn or npm install`
 
 then:
 
-### `yarn start`
+## `yarn start or npm start`
 
 Runs the app in the development mode.<br /> Open
 [http://localhost:3000](http://localhost:3000) to view it in the browser.
