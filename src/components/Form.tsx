@@ -35,7 +35,7 @@ export const Form = () => {
     setIsModalOpen(success)
   }, [success])
 
-  const { control, handleSubmit, formState, watch, setValue, reset } =
+  const { control, handleSubmit, formState, watch, setValue, reset, register } =
     useForm<FormData>({
       defaultValues: {
         firstName: '',
@@ -52,7 +52,7 @@ export const Form = () => {
           country: '',
           zip: '',
         },
-        file: '',
+        file: undefined,
       },
       resolver: yupResolver(formSchema),
       mode: 'onChange',
@@ -135,7 +135,7 @@ export const Form = () => {
             label="Validation file"
             name="file"
             control={control}
-            type="file"
+            register={register}
           />
           <Button
             type="submit"

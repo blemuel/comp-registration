@@ -21,7 +21,7 @@ const initialState = {
       country: '',
       zip: '',
     },
-    file: '',
+    file: {} as FileList,
   } as Partial<FormData>,
 }
 

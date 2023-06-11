@@ -7,6 +7,14 @@ const store = configureStore({
     form: formSlice,
     address: addressSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['form/submitForm'],
+        ignoredActionPaths: ['meta.arg.file', 'payload.file'],
+        ignoredPaths: ['form.formData.file', 'payload.file'],
+      },
+    }),
 })
 export default store
 

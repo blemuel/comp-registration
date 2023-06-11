@@ -10,23 +10,22 @@ import { Control, useController } from 'react-hook-form'
 
 type Props = {
   label?: string
-  placeholder?: string
   name: string
   control: Control<any>
   helperText?: string
   type?: string
+  register?: any
 }
 
 export const FileInput = ({
   label,
-  placeholder,
   name,
   control,
   helperText,
-  type = 'text',
+  type = 'file',
+  register,
 }: Props) => {
   const {
-    field: { onChange, onBlur, value, ref },
     fieldState: { error },
   } = useController({
     name,
@@ -41,13 +40,10 @@ export const FileInput = ({
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Input
           id={name}
-          ref={ref}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          onBlur={onBlur}
+          name={name}
           isInvalid={invalid}
           type={type}
+          {...register('file')}
         />
         {invalid ? (
           <FormErrorMessage>{error?.message}</FormErrorMessage>

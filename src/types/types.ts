@@ -17,7 +17,7 @@ export type FormData = {
   corporationDate: string
   addressString: string
   address: Address
-  file: string | File
+  file: FileList
 }
 
 export const formSchema = yup
@@ -36,5 +36,6 @@ export const formSchema = yup
       zip: yup.string().required(),
       country: yup.string().required(),
     }),
+    file: yup.mixed().required(),
   })
   .required()
