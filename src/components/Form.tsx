@@ -35,28 +35,36 @@ export const Form = () => {
     setIsModalOpen(success)
   }, [success])
 
-  const { control, handleSubmit, formState, watch, setValue, reset, register } =
-    useForm<FormData>({
-      defaultValues: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        birthDate: '',
-        companyName: '',
-        corporationDate: '',
-        addressString: '',
-        address: {
-          street: '',
-          city: '',
-          state: '',
-          country: '',
-          zip: '',
-        },
-        file: undefined,
+  const {
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    setValue,
+    reset,
+    register,
+    setError,
+  } = useForm<FormData>({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      birthDate: '',
+      companyName: '',
+      corporationDate: '',
+      addressString: '',
+      address: {
+        street: '',
+        city: '',
+        state: '',
+        country: '',
+        zip: '',
       },
-      resolver: yupResolver(formSchema),
-      mode: 'onChange',
-    })
+      file: undefined,
+    },
+    resolver: yupResolver(formSchema),
+    mode: 'onChange',
+  })
 
   const submitForm = async (data: FormData) => {
     data = {
@@ -130,7 +138,12 @@ export const Form = () => {
             control={control}
             type="date"
           />
-          <Search control={control} watch={watch} setValue={setValue} />
+          <Search
+            control={control}
+            watch={watch}
+            setValue={setValue}
+            setError={setError}
+          />
           <FileInput
             label="Validation file"
             name="file"
