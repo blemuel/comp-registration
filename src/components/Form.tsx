@@ -155,7 +155,7 @@ export const Form = () => {
           <ModalHeader>Data sent!</ModalHeader>
           <ModalBody p="10">
             <Text fontSize="2xl">
-              Hi {formData.firstName}, data sent successfully!
+              Hi {formData.firstName}, data successfully sent!
             </Text>
           </ModalBody>
         </ModalContent>
