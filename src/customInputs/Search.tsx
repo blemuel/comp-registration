@@ -1,5 +1,6 @@
 import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react'
-import { Control, UseFormWatch } from 'react-hook-form'
+import { useEffect } from 'react'
+import { Control, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAddress } from '../redux/feature/addressSlice'
 import { AppDispatch, RootState } from '../redux/store'
@@ -9,15 +10,22 @@ import { CustomInput } from './CustomInput'
 type Props = {
   control: Control<any>
   watch: UseFormWatch<FormData>
+  setValue: UseFormSetValue<FormData>
 }
 
-export const Search = ({ control, watch }: Props) => {
+export const Search = ({ control, watch, setValue }: Props) => {
   const dispatch = useDispatch<AppDispatch>()
   const { loading, address, success } = useSelector(
     (state: RootState) => state.address
   )
 
   const watchAddressString = watch('addressString')
+
+  useEffect(() => {
+    setValue('address', address)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address])
 
   const handleSubmit = () => {
     dispatch(getAddress({ query: watchAddressString }))

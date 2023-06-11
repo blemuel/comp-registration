@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import addressSlice from './feature/addressSlice'
-import authReducer from './feature/formSlice'
+import formSlice from './feature/formSlice'
 
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    form: formSlice,
     address: addressSlice,
   },
 })

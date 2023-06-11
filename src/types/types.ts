@@ -1,22 +1,23 @@
 import * as yup from 'yup'
 
 export type Address = {
-  street?: string
-  city?: string
-  state?: string
-  zip?: string
-  country?: string
+  street: string
+  city: string
+  state: string
+  zip: string
+  country: string
 }
 
 export type FormData = {
   firstName: string
   lastName: string
   email: string
-  birthDate: Date
+  birthDate: string
   companyName: string
-  corporationDate: Date
+  corporationDate: string
   addressString: string
   address: Address
+  file: string | File
 }
 
 export const formSchema = yup
@@ -25,7 +26,7 @@ export const formSchema = yup
     firstName: yup.string().required(),
     lastName: yup.string().required(),
     email: yup.string().email().required(),
-    birthDate: yup.date().required(),
+    birthDate: yup.date().required().max(new Date()),
     companyName: yup.string().required(),
     corporationDate: yup.date().required(),
     address: yup.object({

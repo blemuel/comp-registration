@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const initialState = {
   loading: false,
-  error: null,
+  error: '',
   success: false,
   address: {
     street: '',
@@ -13,10 +13,6 @@ const initialState = {
     country: '',
   },
 }
-
-// Fake envs to don't need to create a .env file
-const backendURL = 'https://maps.googleapis.com/maps/api'
-const fakeEnv = 'AIzaSyDdyKdaPjssTn88nUwMfmsnxsIeiTySRy8'
 
 export const getAddress = createAsyncThunk(
   'address/getAddress',
@@ -28,7 +24,7 @@ export const getAddress = createAsyncThunk(
         },
       }
       const { data } = await axios.get(
-        `${backendURL}/geocode/json?address=${query}&key=${fakeEnv}`,
+        `${process.env.REACT_APP_MAPS_BASE_URL}/geocode/json?address=${query}&key=${process.env.REACT_APP_MAPS_API_KEY}`,
         config
       )
       if (data.status !== 'OK') return rejectWithValue('No data found')
@@ -54,7 +50,9 @@ export const getAddress = createAsyncThunk(
 const addressSlice = createSlice({
   name: 'address',
   initialState,
-  reducers: {},
+  reducers: {
+    resetAddress: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(getAddress.pending, (state) => {
       state.loading = true
@@ -66,8 +64,11 @@ const addressSlice = createSlice({
     })
     builder.addCase(getAddress.rejected, (state) => {
       state.loading = false
+      state.error = 'Something went wrong'
     })
   },
 })
+
+export const { resetAddress } = addressSlice.actions
 
 export default addressSlice.reducer
