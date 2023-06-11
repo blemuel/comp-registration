@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { formApi } from '../services/form/formService'
 import addressSlice from './feature/addressSlice'
 import formSlice from './feature/formSlice'
 
@@ -6,6 +7,7 @@ const store = configureStore({
   reducer: {
     form: formSlice,
     address: addressSlice,
+    [formApi.reducerPath]: formApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -14,7 +16,7 @@ const store = configureStore({
         ignoredActionPaths: ['meta.arg.file', 'payload.file'],
         ignoredPaths: ['form.formData.file', 'payload.file'],
       },
-    }),
+    }).concat(formApi.middleware),
 })
 export default store
 

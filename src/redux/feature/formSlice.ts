@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { FormData } from '../../types/types'
 
+import axios from 'axios'
 import CryptoJS from 'crypto-js'
 
 const initialState = {
@@ -25,9 +26,7 @@ const initialState = {
   } as Partial<FormData>,
 }
 
-const fakeSendDataToServer = (data: string) => {
-  console.log('DATA SENT', data)
-}
+const backendURL = 'http://localhost:5000'
 
 export const submitFormAction = createAsyncThunk(
   'form/submitForm',
@@ -38,7 +37,22 @@ export const submitFormAction = createAsyncThunk(
         process.env.REACT_APP_MY_SUPER_SAFE_SECRET as string
       )
 
-      fakeSendDataToServer(secretInfo.toString())
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+
+      // Simulates sending data to backend
+      try {
+        await axios.post(
+          `${backendURL}/api/form/send-form`,
+          { secretInfo },
+          config
+        )
+      } catch {
+        // NOTE: As the backend is not implemented, this will always fail
+      }
 
       return formDate
     } catch (error: any) {
